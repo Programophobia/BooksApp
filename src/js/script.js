@@ -21,9 +21,15 @@
     for(let listImage of listImages){
       listImage.addEventListener('dblclick', function(event){
         event.preventDefault();
-        listImage.classList.add('favorite');
         const favId = listImage.getAttribute('data-id');
-        favouriteBooks.push(favId);
+
+        if(!favouriteBooks.includes(favId)){
+          listImage.classList.add('favorite');
+          favouriteBooks.push(favId);
+        }
+        else {
+          listImage.classList.remove('favorite');
+        }
       });
     }
   }
