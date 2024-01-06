@@ -12,6 +12,22 @@
       list.appendChild(element);
     }
   }
-  render();
-}
+  //Add book to fav list
+  const favouriteBooks = [];
 
+  function initActions() {
+    const listImages = document.querySelectorAll('.book__image');
+
+    for(let listImage of listImages){
+      listImage.addEventListener('dblclick', function(event){
+        event.preventDefault();
+        listImage.classList.add('favorite');
+        const favId = listImage.getAttribute('data-id');
+        favouriteBooks.push(favId);
+      });
+    }
+  }
+
+  render();
+  initActions();
+}
