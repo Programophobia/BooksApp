@@ -4,7 +4,6 @@
   const booksTemplate = Handlebars.compile(document.querySelector('#template-book').innerHTML);
 
   function render() {
-    const thisBooks = this;
    
     for (let book in dataSource.books) {
       const generatedHTML = booksTemplate(dataSource.books[book]);
@@ -16,22 +15,24 @@
   const favouriteBooks = [];
 
   function initActions() {
-    const listImages = document.querySelectorAll('.book__image');
+    //const listImages = document.querySelectorAll('.book__image');
 
-    for(let listImage of listImages){
-      listImage.addEventListener('dblclick', function(event){
-        event.preventDefault();
-        const favId = listImage.getAttribute('data-id');
+    //for(let listImage of listImages){
+    list.addEventListener('dblclick', function(event){
+      event.preventDefault();
+      const clickedContainer = event.target.offsetParent;
 
-        if(!favouriteBooks.includes(favId)){
-          listImage.classList.add('favorite');
-          favouriteBooks.push(favId);
-        }
-        else {
-          listImage.classList.remove('favorite');
-        }
-      });
-    }
+      console.log( clickedContainer);
+      const favId = clickedContainer.getAttribute('data-id');
+
+      if(!favouriteBooks.includes(favId)){
+        clickedContainer.classList.add('favorite');
+        favouriteBooks.push(favId);
+      }
+      else {
+        clickedContainer.classList.remove('favorite');
+      }
+    });
   }
 
   render();
