@@ -2,6 +2,7 @@
 {
   const list = document.querySelector('.books-list');
   const booksTemplate = Handlebars.compile(document.querySelector('#template-book').innerHTML);
+  const filtersForm = document.querySelector('.filters');
 
   function render() {
    
@@ -13,6 +14,7 @@
   }
   //Add book to fav list
   const favouriteBooks = [];
+  const filters = [];
 
   function initActions() {
     //const listImages = document.querySelectorAll('.book__image');
@@ -33,8 +35,39 @@
         clickedContainer.classList.remove('favorite');
       }
     });
+
+    filtersForm.addEventListener('click', function(event){
+    
+      if (event.target.checked){
+        filters.push(event.target.value);
+        console.log(filters);
+      }
+      else {
+        filters.splice(filters.indexOf(event.target.value),1);
+      }
+
+      filterBooks();
+    });
   }
 
+  function filterBooks() {
+    for (let book of dataSource.books){
+      let hidden = false;
+      for (const filter of filters){
+        if (!book.details[filter]){
+          hidden = true;
+        // break;
+        }
+        const bookElement = document.querySelector('.book__image[data-id="' + book.id +'"]');
+        if (hidden) {
+          bookElement.classList.add('hidden');
+        }
+        else {
+          bookElement.classList.remove('hidden');
+        }
+      }
+    }
+  }
   render();
   initActions();
 }
