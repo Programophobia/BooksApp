@@ -38,7 +38,7 @@ class BooksList {
     const thisBooksList = this;
     const favouriteBooks = [];
 
-    thisBooksList.list.addEventListener('dblclick', function(event){
+    thisBooksList.list.addEventListener('click', function(event){
       event.preventDefault();
       const clickedContainer = event.target.offsetParent;
       console.log( clickedContainer);
@@ -72,14 +72,14 @@ class BooksList {
         if (!book.details[filter]){
           hidden = true;
         }
-        const bookElement = document.querySelector('.book__image[data-id="' + book.id +'"]');
-        if (hidden) {
-          bookElement.classList.add('hidden');
-        }
-        else {
-          bookElement.classList.remove('hidden');
-        }
       }
+      const bookElement = document.querySelector('.book__image[data-id="' + book.id +'"]');
+      if (hidden) {
+        bookElement.classList.add('hidden');
+      }
+      else {
+        bookElement.classList.remove('hidden');
+      }  
     }
   }
 
